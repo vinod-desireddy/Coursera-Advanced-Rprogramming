@@ -1,0 +1,60 @@
+outputs of summary methods:
+#print methods for summary
+
+print.Summary <- function(daata){
+      print(paste("max_avg_value", max(daata$avg_value), sep = '='))
+      print(paste("min_avg_value", min(daata$avg_value), sep = '='))
+      print(paste("mean_avg_value", mean(daata$avg_value), sep = '='))
+}
+print.Summary(dataa)
+
+#summary methods for the above classes
+
+summary.Subject <- function(daata){
+      class(daata) = 'data.frame'
+      sub = daata %>% group_by(id) %>% 
+            summarise(avg_value = mean(value, na.rm = T))
+      structure(list(id = sub$id,
+                     avg_value = sub$avg_value),
+                class = 'Summary')
+}
+
+summary.Subject(dataa)
+-------------------------
+> summary.Subject(dataa)
+[1] "max_avg_value=57.7325358678279"
+[1] "min_avg_value=7.08031067321872"
+[1] "mean_avg_value=16.8561298177851"
+---------------------------------
+
+summary.Visit <- function(daata){
+      class(daata) = 'data.frame'
+      sub = daata %>% group_by(visit) %>% 
+            summarise(avg_value = mean(value, na.rm = T))
+      structure(list(visit = sub$visit,
+                     avg_value = sub$avg_value),
+                class = 'Summary')
+}
+summary.Visit(dataa)
+-------------------------
+> summary.Visit(dataa)
+[1] "max_avg_value=21.5112577374285"
+[1] "min_avg_value=11.5793213045498"
+[1] "mean_avg_value=17.5069425671863"
+--------------------------------------
+
+summary.Room <- function(daata){
+      class(daata) = 'data.frame'
+      sub = daata %>% group_by(room) %>%
+            summarise(avg_value = mean(value, na.rm = T))
+      structure(list(room_name = sub$room,
+                     avg_value = sub$avg_value),
+                class = 'Summary')
+}
+summary.Room(dataa)
+-------------------------
+> summary.Room(dataa)
+[1] "max_avg_value=23.318978809616"
+[1] "min_avg_value=5.73704594017094"
+[1] "mean_avg_value=12.1758686551125"
+---------------------------------
